@@ -12,6 +12,9 @@ public class Graph implements GraphADT {
 	private ArrayList<NodeADT> nodes = new ArrayList<NodeADT>();
 
 	public void addEdge(NodeADT startNode, NodeADT endNode, String label) {
+		assert startNode != null:"Start node is null";
+		assert endNode != null:"End node is null";
+		assert label != null:"Label is null";
 		EdgeADT addedEdge = new Edge(startNode, endNode, label);
 		edges.add(addedEdge);
 	}
@@ -21,7 +24,9 @@ public class Graph implements GraphADT {
 		Queue<List<NodeADT>> searchQueue = new LinkedList<List<NodeADT>>();
 		List<NodeADT> startPath = new ArrayList<>();
 		startPath.add(startNode);
+		assert startPath.contains(startNode):"node not added to path";
 		searchQueue.add(startPath);
+		assert searchQueue.contains(startPath):"search queue doesn't contain start path";
 		while(!searchQueue.isEmpty()){
 			
 			currentPath = searchQueue.poll();
@@ -34,6 +39,7 @@ public class Graph implements GraphADT {
 				searchQueue.add(list);
 			
 		}
+		assert !searchQueue.isEmpty():"SearchQueue isn't empty at the end of the search";
 		return null;
 		
 	}
@@ -91,6 +97,7 @@ public class Graph implements GraphADT {
 	public void addNode(int id, String label) {
 		Node addedNode = new Node(id, label);
 		nodes.add(addedNode);
+		assert !nodes.isEmpty():"node not added";
 	}
 	
 	public NodeADT getNode(int id) {
